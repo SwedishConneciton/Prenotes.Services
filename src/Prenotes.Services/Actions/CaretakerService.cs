@@ -1,5 +1,4 @@
 
-using System;
 using Neo4j.Driver.V1;
 using Prenotes.Services.Stores;
 using Prenotes.Services.Things;
@@ -16,8 +15,10 @@ namespace Prenotes.Services.Actions {
         
         public Caretaker Create(Caretaker obj)
         {
-            Caretaker next = CaretakerStore.Create(obj)(driver);
-            return next;
+            using (ISession session = driver.Session()) {
+                Caretaker next = CaretakerStore.Create(obj)(session);
+                return next;
+            }
         }
     }
 }
