@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.App" Version="1.1.0" />
-    <PackageReference Include="Neo4j.Driver" Version="1.0.2" />
+    <PackageReference Include="Neo4j.Driver" Version="1.1.0-m03" />
   </ItemGroup>
 
 </Project>
