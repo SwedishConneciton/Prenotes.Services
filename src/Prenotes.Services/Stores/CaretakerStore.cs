@@ -12,9 +12,10 @@ namespace Prenotes.Services.Stores {
             return (ISession session) => {
                 var results = session
                     .Run(
-                        "CREATE (a:Caretaker {email: {email})",
+                        "CREATE (a:Caretaker {email: {email}})",
                         new Dictionary<string, object> { {"email", obj.email} }
-                    );
+                    )
+                    .Consume();
 
                 return obj;
             };

@@ -1,24 +1,35 @@
 
-using System.Linq;
-using Neo4j.Driver.V1;
+using Prenotes.Services.Stores;
+using Prenotes.Services.Things;
 using Xunit;
 
 namespace Prenotes.Services.Test.Stores {
 
-    public class CaretakerStoreTest {
+    public class CaretakerStoreTest : IClassFixture<Neo4jFixture> {
+
+        private Neo4jFixture fixture;
+
+        public CaretakerStoreTest(Neo4jFixture fixture) {
+            this.fixture = fixture;
+
+            using (var tx = this.fixture.Session.BeginTransaction())
+            {
+                tx.Run("MATCH (n:Caretaker) DETACH DELETE n");
+                tx.Success();
+            }
+        }
 
         [Fact]
         public void Connection() {
-            using (var driver = GraphDatabase.Driver(
-                "bolt://localhost:7687", 
-                AuthTokens.Basic("neo4j", "prenotes"))
-            )
-            using (var session = driver.Session())
-            {
-                var result = session.Run("MATCH (a:Caretaker) return a");
+            string email = "gary@gmail.com";
 
-                Assert.Equal(0, result.ToList().Count());
-            }
+            var obj = CaretakerStore
+                .Create(
+                    new Caretaker(email)
+                )
+                (this.fixture.Session);
+
+            Assert.Equal(email, obj.email);
         }
     }
 }
