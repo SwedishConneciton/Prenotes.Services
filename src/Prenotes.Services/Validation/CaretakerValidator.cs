@@ -10,8 +10,8 @@ namespace Prenotes.Services.Validation {
 
         }
 
-        public override Caretaker Create(Caretaker obj) {
-            return base.Create(obj);    
+        public override Caretaker Create(Caretaker obj, Employee creator) {
+            return base.Create(obj, creator);    
         }
     }
 }

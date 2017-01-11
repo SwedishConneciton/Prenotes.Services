@@ -11,8 +11,9 @@ namespace Prenotes.Services.Actions {
             this.srv = srv;
         }
 
-        public virtual Caretaker Create(Caretaker obj) {
-            return srv.Create(obj);
+        public virtual Caretaker Create(Caretaker obj, Employee creator) {
+            // is obj.email an email?
+            return srv.Create(obj, creator);
         }
     }
 }

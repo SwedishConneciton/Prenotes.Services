@@ -13,10 +13,10 @@ namespace Prenotes.Services.Actions {
             this.driver = driver;
         }
         
-        public Caretaker Create(Caretaker obj)
+        public Caretaker Create(Caretaker obj, Employee creator)
         {
             using (ISession session = driver.Session()) {
-                Caretaker next = CaretakerStore.Create(obj)(session);
+                Caretaker next = CaretakerStore.Create(obj, creator)(session);
                 return next;
             }
         }
