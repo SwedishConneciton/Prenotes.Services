@@ -16,8 +16,8 @@ namespace Prenotes.Services.Stores {
                 try {
                     var results = session
                         .Run(
-                            "MATCH (e:Employee {email: {creator}}) " +
-                            "CREATE (c:Caretaker {email: {email}, created: {created}, name: {name}})" +
+                            "MATCH (e:User:Employee {email: {creator}}) " +
+                            "CREATE (c:User:Caretaker {email: {email}, created: {created}, name: {name}})" +
                             "<-[:CREATED]-(e)",
                             new Dictionary<string, object> {
                                 {"creator", creator.email}, 
