@@ -16,10 +16,11 @@ namespace Prenotes.Services.Stores {
                 try {
                     var results = session
                         .Run(
-                            "MERGE (e:Employee {email: {email}}) " +
-                            "CREATE UNIQUE (c:Caretaker {email: {email}, created: {created}, name: {name}})" +
+                            "MATCH (e:Employee {email: {creator}}) " +
+                            "CREATE (c:Caretaker {email: {email}, created: {created}, name: {name}})" +
                             "<-[:CREATED]-(e)",
-                            new Dictionary<string, object> { 
+                            new Dictionary<string, object> {
+                                {"creator", creator.email}, 
                                 {"email", obj.email},
                                 {"created", created },
                                 {"name", obj.name }
