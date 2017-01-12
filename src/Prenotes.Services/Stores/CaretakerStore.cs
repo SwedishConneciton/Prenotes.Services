@@ -9,6 +9,12 @@ namespace Prenotes.Services.Stores {
 
     public static class CaretakerStore {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="creator"></param>
+        /// <returns></returns>
         public static Func<ISession, Caretaker> Create(Caretaker obj, Employee creator) {
             return (ISession session) => {
                 long created = new System.DateTimeOffset().ToUnixTimeSeconds();
