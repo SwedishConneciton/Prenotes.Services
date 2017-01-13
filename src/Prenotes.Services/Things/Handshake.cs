@@ -14,6 +14,11 @@ namespace Prenotes.Services.Things {
         public readonly string email;
 
         /// <summary>
+        /// When the handshake was created (Unix epoch)
+        /// </summary>
+        public readonly long created;
+
+        /// <summary>
         /// When the handshake was confirmed (Unix epoch)
         /// </summary>
         public readonly long confirmed;
