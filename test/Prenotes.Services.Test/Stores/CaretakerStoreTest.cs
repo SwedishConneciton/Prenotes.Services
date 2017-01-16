@@ -38,11 +38,11 @@ namespace Prenotes.Services.Test.Stores {
         }
 
         [Fact]
-        public void Create() {
+        public void Confirm() {
             var obj = CaretakerStore
-                .Create(
+                .Confirm(
                     new Caretaker("gary@gmail.com", 0, "Gary"),
-                    new Handshake()
+                    0
                 )
                 (this.fixture.Session);
 

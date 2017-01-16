@@ -15,17 +15,18 @@ namespace Prenotes.Services.Stores {
         /// <param name="obj"></param>
         /// <param name="creator"></param>
         /// <returns></returns>
-        public static Func<ISession, Caretaker> Create(Caretaker obj, Handshake shake) {
+        public static Func<ISession, Caretaker> Confirm(Caretaker obj, int code) {
             return (ISession session) => {
                 long created = new System.DateTimeOffset().ToUnixTimeSeconds();
 
                 try {
                     var results = session
                         .Run(
-                            "MATCH (e:User:Employee)<-[:BY]-(h:Handshake)" +
+                            "MATCH (h:Handshake {code: {code}, email: {email}})<-[:CREATED]-(e:User:Employee) " +
                             "CREATE (c:User:Caretaker {email: {email}, created: {created}, name: {name}})" +
                             "<-[:CREATED]-(e)",
                             new Dictionary<string, object> {
+                                {"code", code},
                                 {"email", obj.email},
                                 {"created", created },
                                 {"name", obj.name }

@@ -15,9 +15,7 @@ namespace Prenotes.Services.Test.Validation {
         
         public CaretakerValidatorTest() {
             this.service = new CaretakerValidator(
-                new FakeCaretakerService(),  // class is defined at the bottom of this file
-                new CaretakerRules(),
-                new HandshakeRules()
+                new FakeCaretakerService()
             );
         }
 
@@ -30,9 +28,9 @@ namespace Prenotes.Services.Test.Validation {
         public void BadEmailWhenCreating() {
             var exception = Record.Exception(
                 () => {
-                    service.Create(
+                    service.Confirm(
                         new Caretaker("gary", 0, ""),
-                        new Handshake()
+                        0
                     );
                 }
             );
@@ -44,13 +42,13 @@ namespace Prenotes.Services.Test.Validation {
         /// Create works
         /// </summary>
         [Fact]
-        public void GoodCreate() {
+        public void GoodConfirm() {
             // Todo: The Handshake (Thing) doesn't have a 
             // valid constructor that sets the readonly properties.
             // Fix that first then make sure this test case works.
-            var obj = service.Create(
+            var obj = service.Confirm(
                 new Caretaker("gary@gmail.com", 0, ""),
-                new Handshake()
+                0
             );
 
             Assert.NotNull(obj);
@@ -60,14 +58,14 @@ namespace Prenotes.Services.Test.Validation {
         /// Positive Caretaker but validation for Handshake should fail
         /// </summary>
         [Fact]
-        public void BadHandshakeWhenCreating() {
+        public void BadHandshakeWhenConfirming() {
             // Todo: This should fail rather than pass which means we need to correct
             // the code in the HandshakeRules.cs
             var exception = Record.Exception(
                 () => {
-                    service.Create(
+                    service.Confirm(
                         new Caretaker("gary@gmail.com", 0, ""),
-                        new Handshake()
+                        0
                     );
                 }
             );
@@ -82,7 +80,7 @@ namespace Prenotes.Services.Test.Validation {
 
     public class FakeCaretakerService : ICaretakerService
     {
-        Caretaker ICaretakerService.Create(Caretaker obj, Handshake shake)
+        Caretaker ICaretakerService.Confirm(Caretaker obj, int code)
         {
             return obj;
         }

@@ -4,6 +4,14 @@ using Prenotes.Services.Things;
 namespace Prenotes.Services.Actions {
 
     public interface ICaretakerService {
-        Caretaker Create(Caretaker obj, Handshake shake);
+
+        /// <summary>
+        /// Confirms the confirmation code and persists the
+        /// Caretaker 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        Caretaker Confirm(Caretaker obj, int code);
     }
 }

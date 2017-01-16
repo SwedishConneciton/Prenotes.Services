@@ -1,34 +1,27 @@
 using FluentValidation;
-using FluentValidation.Results;
 using Prenotes.Services.Actions;
 using Prenotes.Services.Things;
-using System.Linq;
 
 namespace Prenotes.Services.Validation {
 
     public class CaretakerValidator : CaretakerDecorator {
         
-        private readonly AbstractValidator<Caretaker> caretakerRules;
+        public AbstractValidator<Caretaker> CaretakerRules = new CaretakerRules();
 
-        private readonly AbstractValidator<Handshake> handshakeRules;
+        public AbstractValidator<int> CodeRules = new CodeRules();
 
-        public CaretakerValidator(ICaretakerService srv, AbstractValidator<Caretaker> caretakerRules, AbstractValidator<Handshake> handshakeRules): base(srv) {
-            this.caretakerRules = caretakerRules;
-            this.handshakeRules = handshakeRules;
+        public CaretakerValidator(ICaretakerService srv): base(srv) {
         }
 
-        public override Caretaker Create(Caretaker obj, Handshake shake) {
-            ValidationResult caretakerResults = caretakerRules.Validate(obj);
+        public override Caretaker Confirm(Caretaker obj, int code) {
+            CaretakerRules
+                .Validate(obj)
+                .MaybeExplode();
+            CodeRules
+                .Validate(code)
+                .MaybeExplode();
 
-            if (!caretakerResults.IsValid) {
-                throw new ValidationException(caretakerResults.Errors.First().ErrorMessage);
-            }
-
-            // Todo: Call validate on handshake rules
-
-            // Todo: If not valid then throw exception
-
-            return base.Create(obj, shake);    
+            return base.Confirm(obj, code);    
         }
     }
 }

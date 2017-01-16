@@ -15,9 +15,7 @@ namespace Prenotes.Services {
             );
 
             return new CaretakerValidator(
-                new CaretakerService(driver),
-                new CaretakerRules(),
-                new HandshakeRules()
+                new CaretakerService(driver)
             );
         }
     }

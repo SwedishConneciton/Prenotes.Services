@@ -18,8 +18,8 @@ namespace Prenotes.Services.Actions {
         /// <param name="obj"></param>
         /// <param name="shake"></param>
         /// <returns></returns>
-        public virtual Caretaker Create(Caretaker obj, Handshake shake) {
-            return srv.Create(obj, shake);
+        public virtual Caretaker Confirm(Caretaker obj, int code) {
+            return srv.Confirm(obj, code);
         }
     }
 }

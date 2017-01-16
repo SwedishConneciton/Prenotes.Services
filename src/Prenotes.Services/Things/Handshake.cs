@@ -29,8 +29,11 @@ namespace Prenotes.Services.Things {
         /// where we can set properties.  Finish off the constructor
         /// with arguements and set the propreties.
         /// </remarks>
-        public Handshake () {
-
+        public Handshake (string email, int code, long created, long confirmed) {
+            this.email = email;
+            this.code = code;
+            this.created = created;
+            this.confirmed = confirmed;
         }
     }
 }
