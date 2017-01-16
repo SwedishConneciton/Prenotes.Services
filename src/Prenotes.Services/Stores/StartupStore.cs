@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Neo4j.Driver.V1;
 using Prenotes.Services.Exceptions;
+using Prenotes.Services.Logging;
 
 namespace Prenotes.Services.Stores {
 
@@ -18,12 +19,18 @@ namespace Prenotes.Services.Stores {
         /// <returns></returns>
         public static Func<ISession, int> Constraints() {
             return (ISession session) => {
+
                 try {
                     var results = session
-                        .Run("CREATE CONSTRAINT ON (o:Organization) ASSERT o.name IS UNIQUE")
+                        .Run(
+                            "CREATE CONSTRAINT ON (o:Organization) ASSERT o.name IS UNIQUE " + 
+                            "CREATE CONSTRAINT ON (u:User) ASSERT u.epost IS UNIQUE " + 
+                            "CREATE CONSTRAINT ON (d:Daycare) ASSERT d.name IS UNIQUE "
+                        )
                         .Consume();
 
-                    return 0;
+                    Log.StartupConstraints(results.Counters.ConstraintsAdded);
+                    return results.Counters.ConstraintsAdded;
                 } catch (ClientException e) {
                     throw new SystemException(e.Message);
                 }

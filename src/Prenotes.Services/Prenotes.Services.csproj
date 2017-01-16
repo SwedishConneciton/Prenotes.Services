@@ -3,7 +3,6 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">$(PackageTargetFallback);portable-net451+win8+wp8</PackageTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +12,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.App" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.0" />
     <PackageReference Include="Neo4j.Driver" Version="1.1.0-m03" />
+    <PackageReference Include="FluentValidation" Version="6.4.0-beta9" />
   </ItemGroup>
 
 </Project>

@@ -14,7 +14,11 @@ namespace Prenotes.Services {
                 AuthTokens.Basic(user, password)
             );
 
-            return new CaretakerValidator(new CaretakerService(driver));
+            return new CaretakerValidator(
+                new CaretakerService(driver),
+                new CaretakerRules(),
+                new HandshakeRules()
+            );
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Prenotes.Services.Test.Stores {
             var obj = CaretakerStore
                 .Create(
                     new Caretaker("gary@gmail.com", 0, "Gary"),
-                    new Employee("stella@kommun.se", 0, "Stella")
+                    new Handshake()
                 )
                 (this.fixture.Session);
 
