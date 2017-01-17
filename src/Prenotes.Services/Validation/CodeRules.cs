@@ -8,7 +8,8 @@ namespace Prenotes.Services.Validation {
             // a good solution here might be to the Length built-in validator.
             // See https://github.com/JeremySkinner/FluentValidation/wiki/c.-Built-In-Validators
             RuleFor(x => x)
-                .NotEmpty();
+                .NotEmpty()
+                .Length(6, int.MaxValue);
         }
     }
 }

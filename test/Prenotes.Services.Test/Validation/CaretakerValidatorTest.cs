@@ -5,7 +5,8 @@ using Prenotes.Services.Things;
 using Prenotes.Services.Validation;
 using Xunit;
 
-namespace Prenotes.Services.Test.Validation {
+namespace Prenotes.Services.Test.Validation
+{
 
     public class CaretakerValidatorTest {
 
@@ -56,7 +57,7 @@ namespace Prenotes.Services.Test.Validation {
         /// Positive Caretaker but validation for the code should fail
         /// </summary>
         [Fact]
-        public void BadHandshakeWhenConfirming() {
+        public void EmptyCodeWhenConfirming() {
             // TODO: This should fail rather than pass which means we need to correct
             // the code in the CodeRules.cs (i.e. a blank isn't correct)
             var exception = Record.Exception(
@@ -69,12 +70,27 @@ namespace Prenotes.Services.Test.Validation {
             );
 
             // TODO: When code validation fails then the exception won't be null
-            Assert.Null(exception);
+            Assert.NotNull(exception);
+        }
+[Fact]
+        public void TooShortCodeWhenConfirming() {
+            // TODO: This should fail rather than pass which means we need to correct
+            // the code in the CodeRules.cs (i.e. a blank isn't correct)
+            var exception = Record.Exception(
+                () => {
+                    service.Confirm(
+                        new Caretaker("gary@gmail.com", 0, ""),
+                        "ABC"
+                    );
+                }
+            );
+
+            // TODO: When code validation fails then the exception won't be null
+            Assert.NotNull(exception);
         }
 
-        
     }
-
+            
 
     public class FakeCaretakerService : ICaretakerService
     {
