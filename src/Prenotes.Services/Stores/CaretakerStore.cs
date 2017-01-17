@@ -15,7 +15,7 @@ namespace Prenotes.Services.Stores {
         /// <param name="obj"></param>
         /// <param name="creator"></param>
         /// <returns></returns>
-        public static Func<ISession, Caretaker> Confirm(Caretaker obj, int code) {
+        public static Func<ISession, Caretaker> Confirm(Caretaker obj, string code) {
             return (ISession session) => {
                 long created = new System.DateTimeOffset().ToUnixTimeSeconds();
 

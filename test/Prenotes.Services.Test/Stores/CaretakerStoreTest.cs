@@ -42,7 +42,7 @@ namespace Prenotes.Services.Test.Stores {
             var obj = CaretakerStore
                 .Confirm(
                     new Caretaker("gary@gmail.com", 0, "Gary"),
-                    0
+                    ""
                 )
                 (this.fixture.Session);
 

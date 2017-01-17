@@ -24,10 +24,9 @@ namespace Prenotes.Services.Things {
         public readonly long confirmed;
 
         /// <remarks>
-        /// todo: The properties of this class are readonly which
+        /// The properties of this class are readonly which
         /// means that the public constructor is the only place 
-        /// where we can set properties.  Finish off the constructor
-        /// with arguements and set the propreties.
+        /// where we can set properties.
         /// </remarks>
         public Handshake (string email, int code, long created, long confirmed) {
             this.email = email;

@@ -1,4 +1,5 @@
 
+using System;
 using Prenotes.Services.Actions;
 using Prenotes.Services.Things;
 using Prenotes.Services.Validation;
@@ -30,7 +31,7 @@ namespace Prenotes.Services.Test.Validation {
                 () => {
                     service.Confirm(
                         new Caretaker("gary", 0, ""),
-                        0
+                        ""
                     );
                 }
             );
@@ -39,38 +40,35 @@ namespace Prenotes.Services.Test.Validation {
         }
 
         /// <summary>
-        /// Create works
+        /// Confirmation
         /// </summary>
         [Fact]
         public void GoodConfirm() {
-            // Todo: The Handshake (Thing) doesn't have a 
-            // valid constructor that sets the readonly properties.
-            // Fix that first then make sure this test case works.
             var obj = service.Confirm(
                 new Caretaker("gary@gmail.com", 0, ""),
-                0
+                "ABC123"
             );
 
             Assert.NotNull(obj);
         }
 
         /// <summary>
-        /// Positive Caretaker but validation for Handshake should fail
+        /// Positive Caretaker but validation for the code should fail
         /// </summary>
         [Fact]
         public void BadHandshakeWhenConfirming() {
-            // Todo: This should fail rather than pass which means we need to correct
-            // the code in the HandshakeRules.cs
+            // TODO: This should fail rather than pass which means we need to correct
+            // the code in the CodeRules.cs (i.e. a blank isn't correct)
             var exception = Record.Exception(
                 () => {
                     service.Confirm(
                         new Caretaker("gary@gmail.com", 0, ""),
-                        0
+                        ""
                     );
                 }
             );
 
-            // Todo: When Handshake validation fails then the exception won't be null
+            // TODO: When code validation fails then the exception won't be null
             Assert.Null(exception);
         }
 
@@ -80,9 +78,37 @@ namespace Prenotes.Services.Test.Validation {
 
     public class FakeCaretakerService : ICaretakerService
     {
-        Caretaker ICaretakerService.Confirm(Caretaker obj, int code)
+        // TODO: Fix the other methods (e.g. Delete, Edit etc.) so that 
+        // either return something or if the method is void then remove
+        // the throw statement.
+        Caretaker ICaretakerService.Confirm(Caretaker obj, string code)
         {
             return obj;
+        }
+
+        void ICaretakerService.Delete(Caretaker obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICaretakerService.Detach(Caretaker obj, Child child)
+        {
+            throw new NotImplementedException();
+        }
+
+        Caretaker ICaretakerService.Edit(Caretaker obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        Notification ICaretakerService.Notify(Notification obj, Child[] children)
+        {
+            throw new NotImplementedException();
+        }
+
+        Notification ICaretakerService.Retrack(Notification obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
