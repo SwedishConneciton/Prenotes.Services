@@ -31,9 +31,9 @@ namespace Prenotes.Services.Actions {
             return srv.Edit(obj);
         }
 
-        public virtual Notification Notify(Notification obj, Child[] children)
+        public virtual Notification Notify(string message, Child[] children)
         {
-            return srv.Notify(obj, children);
+            return srv.Notify(message, children);
         }
 
         public virtual Notification Retrack(Notification obj)

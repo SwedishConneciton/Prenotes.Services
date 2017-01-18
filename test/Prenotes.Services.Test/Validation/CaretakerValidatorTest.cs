@@ -123,8 +123,10 @@ namespace Prenotes.Services.Test.Validation
             throw new NotImplementedException();
         }
 
-        Notification ICaretakerService.Notify(Notification obj, Child[] children)
+        Notification ICaretakerService.Notify(string message, Child[] children)
         {
+            // TODO: return a Notification object rather than throwing an exception
+            //       (Hint: "return new Notification(message, 0, null);")
             throw new NotImplementedException();
         }
 

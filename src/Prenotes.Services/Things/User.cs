@@ -88,5 +88,17 @@ namespace Prenotes.Services.Things
             this.created = created;
             this.name = name;
         }
+
+        /// <summary>
+        /// Additional constructor nice for confirming users
+        /// where the only important thing is that the email
+        /// is correct.
+        /// </summary>
+        /// <param name="email"></param>
+        public User (string email) {
+            this.email = email;
+            this.created = 0;
+            this.name = null;
+        }
     }
 }

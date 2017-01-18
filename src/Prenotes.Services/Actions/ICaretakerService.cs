@@ -23,7 +23,8 @@ namespace Prenotes.Services.Actions {
         Caretaker Edit(Caretaker obj);
 
         /// <summary>
-        /// Detach then wipe out the caretaker
+        /// Detach then wipe out the caretaker (i.e. when somebody 
+        /// wants to blow away their account)
         /// </summary>
         /// <param name="obj"></param>
         void Delete(Caretaker obj);
@@ -38,9 +39,10 @@ namespace Prenotes.Services.Actions {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="message"></param>
+        /// <param name="children"></param>
         /// <returns></returns>
-        Notification Notify(Notification obj, Child[] children);
+        Notification Notify(string message, Child[] children);
 
         /// <summary>
         /// Retrack a notification

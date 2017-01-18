@@ -3,18 +3,25 @@ namespace Prenotes.Services.Things {
 
     public class Caretaker : User {
 
-        /// <remark>
-        /// The constructor extends the abstract class's constructor using 
-        /// the ": base(...)" directive.  It just passes arguments to the 
-        /// User's constructor letting a Caretaker instance use the public 
-        /// properties defined in User (i.e. email, created, name).
-        ///
-        /// https://msdn.microsoft.com/en-us/library/hfw7t1ce.aspx
-        /// </remark>
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="email"></param>
         /// <param name="created"></param>
         /// <param name="name"></param>
         public Caretaker(string email, long created, string name): base(email, created, name) {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        // TODO: Made an additional constructor which is useful when 
+        //       confirming a caretaker.  Look at the constructor for 
+        //       the abstract User class to see what default values 
+        //       are used (i.e. what "created" and "name" are set to)
+        public Caretaker(string email): base(email) {
+
         }
     }
 }

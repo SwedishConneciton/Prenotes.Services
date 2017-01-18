@@ -37,7 +37,7 @@ namespace Prenotes.Services.Actions {
             throw new NotImplementedException();
         }
 
-        Notification ICaretakerService.Notify(Notification obj, Child[] children)
+        Notification ICaretakerService.Notify(String message, Child[] children)
         {
             throw new NotImplementedException();
         }
