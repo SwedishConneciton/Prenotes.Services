@@ -16,13 +16,6 @@ namespace Prenotes.Services.Test {
         /// <param name="fixture"></param>
         public StartupStoreTest(Neo4jFixture fixture) {
             this.fixture = fixture;
-
-            // TODO: Make sure constraints are here
-            // Example: StartupStore.Constraints(fixture.Session)
-
-            // TODO: Look at CaretakerStoreTest and mimic the code 
-            // which detaches plus deletes nodes between test runs
-            // (i.e. blow away Organization:Prenotes and any Handshakes)
         }
 
         [Fact]
@@ -32,8 +25,5 @@ namespace Prenotes.Services.Test {
                 (this.fixture.Session);
 
         }
-
-        // TODO: Make a new test (i.e. fact) from a method
-        // Example: An empty method with just "Assert.True()" is fine
     }
 }

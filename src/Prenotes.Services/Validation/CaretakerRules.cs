@@ -9,15 +9,20 @@ namespace Prenotes.Services.Validation {
         /// 
         /// </summary>
         public CaretakerRules() {
-            // TODO: The validation library we use https://github.com/JeremySkinner/FluentValidation/wiki 
-            // can even help us make sure the other properties are correct
+            // INFO: "RuleFor" comes from AbstractValidator and wants a function as 
+            //       the first parameter.  That function just returns a value that 
+            //       could come from a property of the type set when extending AbstractValidator
+            //       (i.e. Caretaker in AbstractValidator<Caretaker>).
             RuleFor(x => x.email)
                 .NotEmpty()
                 .EmailAddress();
 
-            // TODO: Do we need to have checks on the "created" property (Hint: probably not)
+            // TODO: Another rule for making sure that the "created" property
+            //       is not negative.  See https://github.com/JeremySkinner/FluentValidation/wiki/c.-Built-In-Validators 
+            //       and look at the "GreaterThanOrEqual" validator.  That default 
+            //       validator probably only takes one parameter
 
-            // TODO: What about the "name" property?  (Hint: probably not)
+            /* RuleFor(x => x.created) */
         }
     }
 }

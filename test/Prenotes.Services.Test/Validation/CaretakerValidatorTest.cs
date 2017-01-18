@@ -58,8 +58,6 @@ namespace Prenotes.Services.Test.Validation
         /// </summary>
         [Fact]
         public void EmptyCodeWhenConfirming() {
-            // TODO: This should fail rather than pass which means we need to correct
-            // the code in the CodeRules.cs (i.e. a blank isn't correct)
             var exception = Record.Exception(
                 () => {
                     service.Confirm(
@@ -69,34 +67,39 @@ namespace Prenotes.Services.Test.Validation
                 }
             );
 
-            // TODO: When code validation fails then the exception won't be null
             Assert.NotNull(exception);
         }
-[Fact]
+
+
+        [Fact]  // TODO: Copy Start
         public void TooShortCodeWhenConfirming() {
-            // TODO: This should fail rather than pass which means we need to correct
-            // the code in the CodeRules.cs (i.e. a blank isn't correct)
             var exception = Record.Exception(
                 () => {
                     service.Confirm(
-                        new Caretaker("gary@gmail.com", 0, ""),
-                        "ABC"
+                        new Caretaker("gary@gmail.com", 0, ""),  // TODO: Make sure "created" isn't positive or 0
+                        "ABC"  // TODO: Make sure the code isn't wrong!  Change to "ABC123" for example
                     );
                 }
             );
 
-            // TODO: When code validation fails then the exception won't be null
             Assert.NotNull(exception);
-        }
+        }  // TODO: Copy End
 
+
+        // TODO: Create a new method (say "BadCreatedWhenConfirming")
+        //       that makes sure that a negative "created" property
+        //       with a Caretaker object is going to thrown an exception.
+        //       Copy the "TooShortCodeWhenConfirming" method and change 
+        //       the name on the copied method.  Remember the whole point 
+        //       of "TooShortCodeWhenConfirming" is to catch an exception.
+        //       That is why we wrap our service call in "Record.Exception"
+        //       then send the results into the variable "exception" which 
+        //       we make sure is not null with an assertion.
     }
             
 
     public class FakeCaretakerService : ICaretakerService
     {
-        // TODO: Fix the other methods (e.g. Delete, Edit etc.) so that 
-        // either return something or if the method is void then remove
-        // the throw statement.
         Caretaker ICaretakerService.Confirm(Caretaker obj, string code)
         {
             return obj;
@@ -114,6 +117,9 @@ namespace Prenotes.Services.Test.Validation
 
         Caretaker ICaretakerService.Edit(Caretaker obj)
         {
+            // BONUS TODO:  Make sure this method doesn't throw an error rather
+            //              returns the "obj" that was passed (Hint: "return obj;" 
+            //              just like with the "Confirm" method)
             throw new NotImplementedException();
         }
 
