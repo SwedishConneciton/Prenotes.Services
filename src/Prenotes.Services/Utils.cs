@@ -14,6 +14,10 @@ namespace Prenotes.Services {
             return Counter.Next();
         }
 
+        public static string WhoAmI() {
+            return Guid.NewGuid().ToString();
+        }
+
         public static void MaybeExplode (this ValidationResult results) {
             if (!results.IsValid) {
                 throw new ValidationException(results.Errors.First().ErrorMessage);

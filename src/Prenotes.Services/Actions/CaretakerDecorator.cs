@@ -16,14 +16,9 @@ namespace Prenotes.Services.Actions {
             return srv.Confirm(obj, code);
         }
 
-        public virtual void Delete(Caretaker obj)
+        public virtual void Nuke(string email)
         {
-            srv.Delete(obj);
-        }
-
-        public virtual void Detach(Caretaker obj, Child child)
-        {
-            srv.Detach(obj, child);
+            srv.Nuke(email);
         }
 
         public virtual Caretaker Edit(Caretaker obj)
@@ -31,14 +26,32 @@ namespace Prenotes.Services.Actions {
             return srv.Edit(obj);
         }
 
-        public virtual Notification Notify(string message, Child[] children)
+        public virtual Notification Notify(string email, string message, Child[] children)
         {
-            return srv.Notify(message, children);
+            return srv.Notify(email, message, children);
         }
 
-        public virtual Notification Retrack(Notification obj)
+        public virtual Notification Reply(string email, string message, string whoami)
         {
-            return srv.Retrack(obj);
+            return srv.Reply(email, message, whoami);
+        }
+
+        public virtual Notification Retract(string email, string whoami)
+        {
+            return srv.Retract(email, whoami);
+        }
+
+        public virtual Notification[] Stream(string email, int skip, int take) {
+            return srv.Stream(email, skip, take);
+        }
+
+        public virtual Notification Read(string email, string whoami) {
+            return srv.Read(email, whoami);
+        }
+
+        public virtual Child[] Children(string email)
+        {
+            return srv.Children(email);
         }
     }
 }

@@ -3,6 +3,11 @@
 namespace Prenotes.Services.Things
 {
     public class Notification {
+
+        /// <summary>
+        /// Unique identification
+        /// </summary>
+        public readonly string whoami;
         
         /// <summary>
         /// Twitter limits a tweat to 140 characters which seems like
@@ -25,7 +30,15 @@ namespace Prenotes.Services.Things
         //       https://dev.twitter.com/overview/api/tweets
         //       However, at lot of things can be represented as relationships!
 
-        public Notification(string message, long created, string lang) {
+        /// <summary>
+        /// Internal (private) constructor pushes for using a builder
+        /// </summary>
+        /// <param name="whoami"></param>
+        /// <param name="message"></param>
+        /// <param name="created"></param>
+        /// <param name="lang"></param>
+        internal Notification(string whoami, string message, long created, string lang) {
+            this.whoami = whoami;
             this.message = message;
             this.created = created;
             this.lang = lang;

@@ -45,11 +45,11 @@ namespace Prenotes.Services.Validation {
         // TODO: Same decision if we need validation on Detach.  Tip: Probably
         //       not since we don't edit or create objects
 
-        public override Notification Notify(string message, Child[] children) {
+        public override Notification Notify(string email, string message, Child[] children) {
             // TODO: Add validation which is only needed on the passed "message".
             //       Finish off the single rule in MessageRules.cs and use it here.
 
-            return base.Notify(message, children);
+            return base.Notify(email, message, children);
         }
 
 

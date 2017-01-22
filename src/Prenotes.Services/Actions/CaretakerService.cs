@@ -22,12 +22,7 @@ namespace Prenotes.Services.Actions {
             }
         }
 
-        void ICaretakerService.Delete(Caretaker obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICaretakerService.Detach(Caretaker obj, Child child)
+        void ICaretakerService.Nuke(string email)
         {
             throw new NotImplementedException();
         }
@@ -37,12 +32,32 @@ namespace Prenotes.Services.Actions {
             throw new NotImplementedException();
         }
 
-        Notification ICaretakerService.Notify(String message, Child[] children)
+        Notification ICaretakerService.Notify(string email, string message, Child[] children)
         {
             throw new NotImplementedException();
         }
 
-        Notification ICaretakerService.Retrack(Notification obj)
+        Notification ICaretakerService.Reply(string email, string message, string whoami) 
+        {
+            throw new NotImplementedException();
+        }
+
+        Notification ICaretakerService.Retract(string email, string whoami)
+        {
+            throw new NotImplementedException();
+        }
+
+        Notification[] ICaretakerService.Stream(string email, int skip, int take)
+        {
+            throw new NotImplementedException();
+        }
+
+        Notification ICaretakerService.Read(string email, string whoami) 
+        {
+            throw new NotImplementedException();
+        }
+
+        Child[] ICaretakerService.Children(string email)
         {
             throw new NotImplementedException();
         }
