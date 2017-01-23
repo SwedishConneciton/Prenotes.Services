@@ -17,12 +17,11 @@ namespace Prenotes.Services.Validation {
                 .NotEmpty()
                 .EmailAddress();
 
-            // TODO: Another rule for making sure that the "created" property
-            //       is not negative.  See https://github.com/JeremySkinner/FluentValidation/wiki/c.-Built-In-Validators 
-            //       and look at the "GreaterThanOrEqual" validator.  That default 
-            //       validator probably only takes one parameter
-
-            /* RuleFor(x => x.created) */
+           
+        
+             RuleFor(x => x.created)
+              .GreaterThanOrEqualTo(0);
+                
         }
     }
 }

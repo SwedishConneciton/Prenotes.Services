@@ -62,27 +62,32 @@ namespace Prenotes.Services.Test.Validation
         }
 
 
-        [Fact]  // TODO: Copy Start
+        [Fact]  
         public void TooShortCodeWhenConfirming() {
             var exception = Record.Exception(
                 () => {
-                    service.Confirm("gary@gmail.com", "ABC");
+                    service.Confirm("gary@gmail.com", "ABC" );
                 }
             );
 
             Assert.NotNull(exception);
-        }  // TODO: Copy End
+        }  
+      
+      
+        [Fact]  
+        public void BadCreatedWhenConfirming() {
+            var exception = Record.Exception(
+                () => {
+                    service.Confirm(
+                        "gary@gmail.com", "ABC123"
+                    );
+                }
+            );
 
+            Assert.NotNull(exception);
+        }
 
-        // TODO: Create a new method (say "BadCreatedWhenConfirming")
-        //       that makes sure that a negative "created" property
-        //       with a Caretaker object is going to thrown an exception.
-        //       Copy the "TooShortCodeWhenConfirming" method and change 
-        //       the name on the copied method.  Remember the whole point 
-        //       of "TooShortCodeWhenConfirming" is to catch an exception.
-        //       That is why we wrap our service call in "Record.Exception"
-        //       then send the results into the variable "exception" which 
-        //       we make sure is not null with an assertion.
+       
     }
             
 
@@ -100,10 +105,7 @@ namespace Prenotes.Services.Test.Validation
 
         Caretaker ICaretakerService.Edit(Caretaker obj)
         {
-            // BONUS TODO:  Make sure this method doesn't throw an error rather
-            //              returns the "obj" that was passed (Hint: "return obj;" 
-            //              just like with the "Confirm" method)
-            throw new NotImplementedException();
+            return  obj;
         }
 
         Notification ICaretakerService.Notify(string email, string message, Child[] children)
