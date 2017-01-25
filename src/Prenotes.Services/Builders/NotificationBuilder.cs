@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using Prenotes.Services.Things;
 
-namespace Prenotes.Services {
+namespace Prenotes.Services.Builders {
 
     public class NotificationBuilder {
 
@@ -16,19 +16,17 @@ namespace Prenotes.Services {
 
         }
         
-        public NotificationBuilder WithLanguage(string lang) {
+        public NotificationBuilder Language(string lang) {
             fields["language"] = lang;
             return this;
         }
 
         public Notification Build(string message) {
-            long created = new System.DateTimeOffset().ToUnixTimeSeconds();
-
             return new Notification(
                 Utils.WhoAmI(),
                 message,
-                created,
-                (string)fields["language"]
+                Utils.Epoch(),
+                fields.ContainsKey("language") ? (string)fields["language"] : null
             );
         }
     }

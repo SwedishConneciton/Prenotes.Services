@@ -30,10 +30,7 @@ namespace Prenotes.Services.Test.Validation
         public void BadEmailWhenCreating() {
             var exception = Record.Exception(
                 () => {
-                    service.Confirm(
-                        new Caretaker("gary", 0, ""),
-                        ""
-                    );
+                    service.Confirm("gary", "");
                 }
             );
 
@@ -45,10 +42,7 @@ namespace Prenotes.Services.Test.Validation
         /// </summary>
         [Fact]
         public void GoodConfirm() {
-            var obj = service.Confirm(
-                new Caretaker("gary@gmail.com", 0, ""),
-                "ABC123"
-            );
+            var obj = service.Confirm("gary@gmail.com", "ABC123");
 
             Assert.NotNull(obj);
         }
@@ -60,10 +54,7 @@ namespace Prenotes.Services.Test.Validation
         public void EmptyCodeWhenConfirming() {
             var exception = Record.Exception(
                 () => {
-                    service.Confirm(
-                        new Caretaker("gary@gmail.com", 0, ""),
-                        ""
-                    );
+                    service.Confirm("gary@gmail.com", "");
                 }
             );
 
@@ -75,10 +66,7 @@ namespace Prenotes.Services.Test.Validation
         public void TooShortCodeWhenConfirming() {
             var exception = Record.Exception(
                 () => {
-                    service.Confirm(
-                        new Caretaker("gary@gmail.com", 0, ""),  // TODO: Make sure "created" isn't positive or 0
-                        "ABC"  // TODO: Make sure the code isn't wrong!  Change to "ABC123" for example
-                    );
+                    service.Confirm("gary@gmail.com", "ABC");
                 }
             );
 
@@ -100,9 +88,9 @@ namespace Prenotes.Services.Test.Validation
 
     public class FakeCaretakerService : ICaretakerService
     {
-        Caretaker ICaretakerService.Confirm(Caretaker obj, string code)
+        Caretaker ICaretakerService.Confirm(string email, string code)
         {
-            return obj;
+            return new Caretaker(email, 0, "", null);
         }
 
         void ICaretakerService.Nuke(string email)

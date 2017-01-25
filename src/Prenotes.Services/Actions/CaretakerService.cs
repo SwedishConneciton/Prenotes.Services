@@ -14,10 +14,10 @@ namespace Prenotes.Services.Actions {
             this.driver = driver;
         }
         
-        public Caretaker Confirm(Caretaker obj, string code)
+        public Caretaker Confirm(String email, string code)
         {
             using (ISession session = driver.Session()) {
-                Caretaker next = CaretakerStore.Confirm(obj, code)(session);
+                Caretaker next = CaretakerStore.Confirm(email, code)(session);
                 return next;
             }
         }

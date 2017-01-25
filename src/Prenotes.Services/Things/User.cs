@@ -57,7 +57,7 @@ namespace Prenotes.Services.Things
         /// a duration from the 70s.  That duration can be transformed into 
         /// a date when we present it to the user in the client (JavaScript).
         /// </remark>
-        public readonly long created;
+        public readonly int created;
 
         /// <summary>
         /// Forname, middle and last names exist in 
@@ -83,22 +83,10 @@ namespace Prenotes.Services.Things
         /// <param name="email"></param>
         /// <param name="created"></param>
         /// <param name="name"></param>
-        public User (string email, long created, string name) {
+        public User (string email, int created, string name) {
             this.email = email;
             this.created = created;
             this.name = name;
-        }
-
-        /// <summary>
-        /// Additional constructor nice for confirming users
-        /// where the only important thing is that the email
-        /// is correct.
-        /// </summary>
-        /// <param name="email"></param>
-        public User (string email) {
-            this.email = email;
-            this.created = 0;
-            this.name = null;
         }
     }
 }

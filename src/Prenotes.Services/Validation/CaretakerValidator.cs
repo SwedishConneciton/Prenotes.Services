@@ -14,16 +14,12 @@ namespace Prenotes.Services.Validation {
         }
 
         
-        public override Caretaker Confirm(Caretaker obj, string code) {
-            CaretakerRules
-                .Validate(obj)
-                .MaybeExplode();
-           
-                CodeRules
+        public override Caretaker Confirm(string email, string code) {           
+            CodeRules
                 .Validate(code)
                 .MaybeExplode();
 
-            return base.Confirm(obj, code);    
+            return base.Confirm(email, code);    
         }
 
        

@@ -4,23 +4,26 @@ namespace Prenotes.Services.Things {
     public class Caretaker : User {
 
         /// <summary>
-        /// 
+        /// Children
+        /// </summary>
+        public readonly Child[] children; 
+
+        /// <summary>
+        /// Full constructor
         /// </summary>
         /// <param name="email"></param>
         /// <param name="created"></param>
         /// <param name="name"></param>
-        public Caretaker(string email, long created, string name): base(email, created, name) {
+        public Caretaker(string email, int created, string name, Child[] children) : base(email, created, name) {
+            this.children = children;
         }
 
         /// <summary>
-        /// 
+        /// Email and at least one child should be provided
         /// </summary>
         /// <param name="email"></param>
-        // TODO: Made an additional constructor which is useful when 
-        //       confirming a caretaker.  Look at the constructor for 
-        //       the abstract User class to see what default values 
-        //       are used (i.e. what "created" and "name" are set to)
-        public Caretaker(string email): base(email) {
+        /// <param name="children"></param>
+        public Caretaker(string email, Child[] children): this(email, 0, null, children) {
 
         }
     }

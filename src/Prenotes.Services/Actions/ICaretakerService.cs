@@ -9,10 +9,10 @@ namespace Prenotes.Services.Actions {
         /// Confirms the confirmation code and persists the
         /// Caretaker if necessary attaching them to a child
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="string"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        Caretaker Confirm(Caretaker obj, string code);
+        Caretaker Confirm(string email, string code);
 
         /// <summary>
         /// Edit the caretaker except the email property

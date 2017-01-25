@@ -12,8 +12,8 @@ namespace Prenotes.Services.Actions {
         }
 
         /// <remarks>The method is marked as virtual to indicate that it should be overriden</remarks>
-        public virtual Caretaker Confirm(Caretaker obj, string code) {
-            return srv.Confirm(obj, code);
+        public virtual Caretaker Confirm(string email, string code) {
+            return srv.Confirm(email, code);
         }
 
         public virtual void Nuke(string email)
