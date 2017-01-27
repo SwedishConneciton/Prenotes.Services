@@ -8,7 +8,8 @@ namespace Prenotes.Services.Actions {
         protected readonly ICaretakerService srv;
 
         public CaretakerDecorator(ICaretakerService srv) {
-            this.srv = srv;
+            this.srv = srv;  
+            
         }
 
         /// <remarks>The method is marked as virtual to indicate that it should be overriden</remarks>
