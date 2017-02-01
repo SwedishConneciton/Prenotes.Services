@@ -16,23 +16,30 @@ namespace Prenotes.Services.Things {
         /// <summary>
         /// When the handshake was created (Unix epoch)
         /// </summary>
-        public readonly long created;
+        public readonly int created;
 
         /// <summary>
         /// When the handshake was confirmed (Unix epoch)
         /// </summary>
-        public readonly long confirmed;
+        public readonly int confirmed;
 
-        /// <remarks>
-        /// The properties of this class are readonly which
-        /// means that the public constructor is the only place 
-        /// where we can set properties.
-        /// </remarks>
-        public Handshake (string email, int code, long created, long confirmed) {
+        /// <summary>
+        /// Full constructor
+        /// </summary>
+        public Handshake (string email, int code, int created, int confirmed) {
             this.email = email;
             this.code = code;
             this.created = created;
             this.confirmed = confirmed;
+        }
+
+        /// <summary>
+        /// Email and code should be provided
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="code"></param>
+        public Handshake (string email, int code): this(email, code, 0, 0) {
+
         }
     }
 }

@@ -6,8 +6,10 @@ namespace Prenotes.Services.Logging {
 
     {
 
-        // Connection open/close
-
+        // Startup
         public const int StartupConstraints = 1;
+
+        // Caretaker
+        public const int ConfirmCaretaker = 100;
     }
 }

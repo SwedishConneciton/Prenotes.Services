@@ -10,14 +10,14 @@ using Xunit;
 namespace Prenotes.Services.Test.Validation
 {
 
-    public class CaretakerValidatorTest {
+    public class EmployeeValidatorTest {
 
         /// <summary>
         /// Fake CaretakerService built in the constructor
         /// </summary>
         private ICaretakerService service;
         
-        public CaretakerValidatorTest() {
+        public EmployeeValidatorTest() {
             this.service = new CaretakerValidator(
                 new FakeCaretakerService()
             );
@@ -158,52 +158,71 @@ namespace Prenotes.Services.Test.Validation
             Assert.NotNull(Notification);
         }
     }
-            
 
-    public class FakeCaretakerService : ICaretakerService
+
+    public class FakeEmployeeService : IEmployeeService
     {
-        Caretaker ICaretakerService.Confirm(string email, string code)
-        {
-            return new Caretaker(email, 0, "", null);
-        }
-
-        void ICaretakerService.Nuke(string email)
+        public Child Add(string email, Child child)
         {
             throw new NotImplementedException();
         }
 
-        Caretaker ICaretakerService.Edit(Caretaker obj)
-        {
-            return obj;
-        }
-
-        Notification ICaretakerService.Notify(string email, string message, Child[] children)
-        {
-           
-            return new Notification("ABC123", message, 0, null);
-        }
-
-        Notification ICaretakerService.Reply(string email, string message, string whoami)
+        public Notification Bad(string email, string whoami)
         {
             throw new NotImplementedException();
         }
 
-        Notification ICaretakerService.Retract(string email, string whoami)
+        public Child[] Children(string email)
         {
             throw new NotImplementedException();
         }
 
-        Notification[] ICaretakerService.Stream(string email, int skip, int take)
+        public Employee Confirm(string email, string code)
+        {
+            return new Employee(email, 0, null);
+        }
+
+        public Employee Edit(Employee obj)
+        {
+            return new Employee(obj.email, 0, null);
+        }
+
+        public Notification Notify(string email, string message, Child[] children)
+        {
+            return new Notification("", message, 0, "en");
+        }
+
+        public Employee[] Others(string email)
         {
             throw new NotImplementedException();
         }
 
-        Notification ICaretakerService.Read(string email, string whoami)
+        public Notification Read(string email, string whoami)
         {
             throw new NotImplementedException();
         }
 
-        Child[] ICaretakerService.Children(string email)
+        public Handshake Register(string caretaker, string email, Child[] children)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(string email, Child child)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Notification Reply(string email, string message, string whoami)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Notification Retract(string email, string whoami)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Notification[] Stream(string email, int skip, int take)
         {
             throw new NotImplementedException();
         }

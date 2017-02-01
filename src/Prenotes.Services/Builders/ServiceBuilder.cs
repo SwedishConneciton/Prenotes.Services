@@ -3,7 +3,7 @@ using Neo4j.Driver.V1;
 using Prenotes.Services.Actions;
 using Prenotes.Services.Validation;
 
-namespace Prenotes.Services {
+namespace Prenotes.Services.Builders {
 
     public static class ServiceBuilder {
 
