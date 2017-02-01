@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentValidation;
 using Prenotes.Services.Actions;
 using Prenotes.Services.Things;
@@ -6,10 +7,14 @@ namespace Prenotes.Services.Validation {
 
     public class CaretakerValidator : CaretakerDecorator {
         
-        public AbstractValidator<Caretaker> CaretakerRules = new CaretakerRules();
+        private AbstractValidator<Caretaker> CaretakerRules = new CaretakerRules();
 
-        public AbstractValidator<string> CodeRules = new CodeRules();
+        private AbstractValidator<string> CodeRules = new CodeRules();
 
+        private AbstractValidator<string> MessageRules =new MessageRules();
+
+        private AbstractValidator<Child> ChildRules =new ChildRules();
+        
         public CaretakerValidator(ICaretakerService srv): base(srv) {
         }
 
@@ -24,33 +29,29 @@ namespace Prenotes.Services.Validation {
 
        
         public override Caretaker Edit(Caretaker obj) {
-            
             CaretakerRules
                 .Validate(obj)
                 .MaybeExplode();
+
             return base.Edit(obj);
-            
         }
 
-
-        // TODO: Decide if we need to override the Delete method inherited 
-        //       from the abstract CaretakerDecorator or not.  Even if we 
-        //       passed a valid Caretaker identified only by it's email 
-        //       that email still might not be found by the underlying service.
-
-
-        // TODO: Same decision if we need validation on Detach.  Tip: Probably
-        //       not since we don't edit or create objects
 
         public override Notification Notify(string email, string message, Child[] children) {
-            // TODO: Add validation which is only needed on the passed "message".
-            //       Finish off the single rule in MessageRules.cs and use it here.
+            MessageRules
+                .Validate(message)
+                .MaybeExplode();
 
+            children?
+                .ToList()
+                .ForEach(
+                    c => ChildRules
+                            .Validate(c)
+                            .MaybeExplode()
+
+                );
+           
             return base.Notify(email, message, children);
-        }
-
-
-        // TODO: Here again do we need validation on the Retrack method?
-        //       Nothing will be created/edited by the underlying service
+        }       
     }
 }

@@ -24,7 +24,6 @@ namespace Prenotes.Services.Things {
         /// <param name="email"></param>
         /// <param name="children"></param>
         public Caretaker(string email, Child[] children): this(email, 0, null, children) {
-
         }
     }
 }

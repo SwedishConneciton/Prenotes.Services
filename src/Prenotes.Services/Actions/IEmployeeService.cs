@@ -9,10 +9,10 @@ namespace Prenotes.Services.Actions {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="email"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        Employee Confirm(Employee obj, string code);
+        Employee Confirm(string email, string code);
 
         /// <summary>
         /// 

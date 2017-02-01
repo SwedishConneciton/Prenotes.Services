@@ -25,7 +25,7 @@ namespace Prenotes.Services.Things
         /// </summary>
         public readonly string lang;
 
-        // TODO: Maybe we can get more ideas about characteristics for 
+        // INFO: Maybe we can get more ideas about characteristics for 
         //       notifications by looking at the Twitter Tweat API
         //       https://dev.twitter.com/overview/api/tweets
         //       However, at lot of things can be represented as relationships!
@@ -37,7 +37,7 @@ namespace Prenotes.Services.Things
         /// <param name="message"></param>
         /// <param name="created"></param>
         /// <param name="lang"></param>
-        internal Notification(string whoami, string message, long created, string lang) {
+        public Notification(string whoami, string message, long created, string lang) {
             this.whoami = whoami;
             this.message = message;
             this.created = created;
