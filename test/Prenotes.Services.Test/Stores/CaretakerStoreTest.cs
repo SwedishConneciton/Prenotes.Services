@@ -20,9 +20,9 @@ namespace Prenotes.Services.Test.Stores {
 
         private Neo4jFixture fixture;
 
-        private string[] Codes = new string[] { "YAI123" };
+        private string[] Codes = new string[] { "YAI123", "DOG000", "SSS000" };
 
-        private string[] Caretakers = new string[] { "gary@gmail.com" };
+        private string[] Caretakers = new string[] { "gary@gmail.com", "sam@gmail.com", "doris@gmail.com" };
 
         protected static TestLoggerSink TestLoggerSink { get; } = new TestLoggerSink();
         
@@ -38,42 +38,104 @@ namespace Prenotes.Services.Test.Stores {
 
             using (var tx = this.fixture.Session.BeginTransaction()) {
                 tx.Run(
-                    "MATCH (h:Handshake) WHERE h.code IN [{codes}] OPTIONAL MATCH (h)--(x) DETACH DELETE h, x",
+                    "MATCH (h:Handshake) WHERE h.code IN {codes} OPTIONAL MATCH (h)--(x) DETACH DELETE h, x",
                     new Dictionary<string, object> { {"codes", Codes} }
                 );
                 tx.Run(
-                    "MATCH (c:Caretaker) WHERE c.email IN [{emails}] OPTIONAL MATCH (c)--(x) DETACH DELETE c, x",
+                    "MATCH (c:Caretaker) WHERE c.email IN {emails} OPTIONAL MATCH (c)--(x) DETACH DELETE c, x",
                     new Dictionary<string, object> { {"emails", Caretakers} }
                 );
+
                 tx.Run(
                     "CREATE (h:Handshake {email: {email}, code: {code}})-[:WITH]->(:Child {name: 'Julia', created: 1}), (h)-[:WITH]->(:Child {name: 'Berry', created: 1}), (h)<-[:CREATED]-(e:User:Employee {email: {staff}})",
                     new Dictionary<string, object> { 
-                        { "email", Caretakers.First() },
-                        { "code", Codes.First() },
+                        { "email", Caretakers.ElementAt(0) },
+                        { "code", Codes.ElementAt(0) },
                         { "staff", "stella@kommun.se" }
+                    }
+                );
+                tx.Run(
+                    "CREATE (h:Handshake {email: {email}, code: {code}})-[:WITH]->(:Child {name: 'Julia', created: 1}), (h)<-[:CREATED]-(e:User:Employee {email: {staff}})",
+                    new Dictionary<string, object> { 
+                        { "email", Caretakers.ElementAt(1) },
+                        { "code", Codes.ElementAt(1) },
+                        { "staff", "jane@kommun.se" }
+                    }
+                );
+                tx.Run(
+                    "CREATE (h:Handshake {email: {email}, code: {code}})-[:WITH]->(:Child {name: 'Julia', created: 1}), (h)<-[:CREATED]-(e:User:Employee {email: {staff}})",
+                    new Dictionary<string, object> { 
+                        { "email", Caretakers.ElementAt(2) },
+                        { "code", Codes.ElementAt(2) },
+                        { "staff", "bob@kommun.se" }
                     }
                 );
                 tx.Success();
             }
 
+            
+
             PrenotesLogManager.LoggerFactory = new LoggerFactory();
             PrenotesLogManager.LoggerFactory.AddProvider(new TestLoggerProvider(TestLoggerSink));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Fact]
-        public void Confirm() {
+        public void ConfirmWithOnlyChild() {
             TestLoggerSink.Clear();
-            var email = Caretakers.First();
+            var email = Caretakers.ElementAt(1);
 
             var obj = CaretakerStore
                 .Confirm(
                     email,
-                    Codes.First()
+                    Codes.ElementAt(1)
                 )
                 (this.fixture.Session);
 
             
             Assert.Equal($"Confirmed {email} having {obj.children.Count()} children", TestLoggerSink.Records.First().Format());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void ConfirmRepeat() {
+            TestLoggerSink.Clear();
+            var email = Caretakers.ElementAt(2);
+
+            var obj = CaretakerStore
+                .Confirm(
+                    email,
+                    Codes.ElementAt(2)
+                )
+                (this.fixture.Session);
+
+            
+            Assert.Equal($"Confirmed {email} having {obj.children.Count()} children", TestLoggerSink.Records.First().Format());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void ConfirmWithMultipleChildren() {
+            TestLoggerSink.Clear();
+            var email = Caretakers.ElementAt(0);
+
+            var obj = CaretakerStore
+                .Confirm(
+                    email,
+                    Codes.ElementAt(0)
+                )
+                (this.fixture.Session);
+
+            
+            Assert.Equal($"Confirmed {email} having {obj.children.Count()} children", TestLoggerSink.Records.First().Format());
+        }
+
+        
     }
 }

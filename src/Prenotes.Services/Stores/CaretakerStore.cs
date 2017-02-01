@@ -29,7 +29,8 @@ namespace Prenotes.Services.Stores {
                 int created = Utils.Epoch();
 
                 try {
-                    var results = session
+                    using (var tx = session.BeginTransaction()) {
+                    var results = tx
                         .Run(
                             "MATCH (h:Handshake {code: {code}, email: {email}})<-[:CREATED]-(e:Employee) WHERE not ((h)<-[:CONFIRMED]-(:Caretaker)) " +
                             "CREATE (c:User:Caretaker {email: {email}, created: {created}})<-[:REGISTERED]-(e) " +
@@ -44,17 +45,21 @@ namespace Prenotes.Services.Stores {
                                 {"created", created }
                             }
                         );
-
+                    
                     Caretaker next = results
-                        .Single()
+                        .ToList()
+                        .First()
                         .ToCaretaker();
+                        
+                    tx.Success();
 
                     Log.ConfirmCaretaker(
                         next.email, 
                         next.children?.Count() ?? 0
                     );
 
-                    return next;
+                        return next;
+                    }
                 } catch (ClientException e) {
                     throw new SystemException(e.Message);
                 }
